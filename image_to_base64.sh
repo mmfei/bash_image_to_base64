@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 path="$1"
-type="$2"
+type_list="$2"
 save_file="$3"
 
 usage(){
@@ -9,20 +9,24 @@ usage(){
 	exit 1
 }
 
-[[ $# -lt 3 ]] && usage
+[[ $# -lt 2 ]] && usage
 
 if [[ ! -z "$save_file" ]]; then
-    echo "$0 $path $type > $save_file";
-    $0 $path $type > $save_file;
+    echo "$0 $path $type_list > $save_file";
+    $0 $path $type_list > $save_file;
 else
+    type_list="$(echo $type_list | sed 's#,# #')"
     d=''
     s='{'
-    for image in `ls $path/*` ; do
-        s="$s$d"
-        s="$s\"$(echo $image | sed "s#$path/##")\"":
-        IMAGE_BASE64="data:image/$type;base64,$(base64 $image)"
-        s="$s\"$IMAGE_BASE64\"";
-       d=','
+    for type in $type_list ; do
+        for image in `ls $path/*.$type` ; do
+            s="$s$d"
+            s="$s\"$(echo $image | sed "s#$path/##")\"":
+            ext="$(echo $image | sed "s#$path/##" | sed "s#.*\.##")"
+            IMAGE_BASE64="data:image/$ext;base64,"$(base64 $image)
+            s="$s\"$IMAGE_BASE64\"";
+        d=','
+        done
     done
     s=$s'}'
     echo $s
