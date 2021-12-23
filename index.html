@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<script>
+    $(document).ready(function (e) {
+        $('#show').click(function () {
+            url = $('#url').val();
+            $.getJSON(url, function (obj) {
+                $.each(obj, function (key, value) {
+                    $("#id").append("<div><h2>" + key + "</h2> <img src='" + value + "'</img></div>");
+                });
+            });
+        });
+
+    });
+</script>
+
+<body>
+    <input type="input" id="url" value="a.json" name="url" />
+    <input type="button" id='show' value="check" />
+    <div id='id'></div>
+</body>
+
+</html>
