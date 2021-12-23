@@ -5,6 +5,7 @@ save_file="$3"
 
 usage(){
 	echo "Usage: $0 path file_type"
+	echo "Usage: $0 path png,jpg,gif"
 	echo "Usage: $0 path file_type json_file"
 	exit 1
 }
