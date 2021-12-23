@@ -1,9 +1,9 @@
 # usage
 ```bash
 # print base64 code
-sh ./image_to_base64.sh ~/Downloads/testImage png
+sh ./image_to_base64.sh ~/Downloads/testImage png,gif,jpg
 # save to json code
-sh ./image_to_base64.sh ~/Downloads/testImage png a.json
+sh ./image_to_base64.sh ~/Downloads/testImage png,gif a.json
 
 # if Permission denied
 # chmod +x image_to_base64.sh
