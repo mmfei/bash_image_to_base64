@@ -16,7 +16,7 @@ if [[ ! -z "$save_file" ]]; then
     echo "$0 $path $type_list > $save_file";
     $0 $path $type_list > $save_file;
 else
-    type_list="$(echo $type_list | sed 's#,# #')"
+    type_list="$(echo $type_list | sed 's#,# #g')"
     d=''
     s='{'
     for type in $type_list ; do
